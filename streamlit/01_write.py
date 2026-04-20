@@ -104,3 +104,15 @@ plt.hist(arr, bins=30)
 fig
 # st.pyplot() 이용해 출력. (위에는 magic write)
 st.pyplot(fig)
+
+st.divider()
+
+st.write(
+"""
+# 제목
+좋아하는 색
+
+- 파란색
+- 빨강색
+"""
+)
