@@ -55,7 +55,7 @@ col4.metric(label="일본JPY(100엔)", value="958.63 원", delta="-7.44 원")
 def get_data():
     print("get_data")
     df = pd.read_csv("data/boston_housing.csv")
-    return df.head(15)
+    return df.head(15) # 15줄만 리턴하겠다
 
 
 st.divider()
