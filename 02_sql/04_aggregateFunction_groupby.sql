@@ -1,3 +1,5 @@
+use testdb;
+
 /* **************************************************************************
 집계(Aggregation) 함수와 GROUP BY, HAVING
 ************************************************************************** */
@@ -28,7 +30,7 @@
 ******************************************************************************************* */
 -- EMP 테이블에서 급여(salary)의 총합계, 평균, 최소값, 최대값, 표준편차, 분산, 총직원수를 조회 
 select sum(salary), 
-	     avg(salary),
+	   avg(salary),
        min(salary),
        max(salary),
        stddev(salary),
@@ -36,13 +38,14 @@ select sum(salary),
 from   emp;
 
 select count(*) from emp;
+select count(emp_id) from emp; -- 총 행수 조회 - count(*), count(primary key 컬럼)
 
 -- EMP 테이블에서 가장 최근 입사일(hire_date)과 가장 오래된 입사일을 조회
 select max(hire_date), min(hire_date) from emp;
 
 -- EMP 테이블의 부서(dept_name) 의 개수를 조회
-select count(dept_name) from emp;
-select count(distinct dept_name) from emp;
+select count(dept_name) from emp; -- null 제외한 값의 개수
+select count(distinct dept_name) from emp; -- 부서(고유값) 개수
 select count(distinct ifnull(dept_name, 'a')) from emp; -- null인 것도 포함해서 count할 경우.
 
 --  커미션 비율(comm_pct)이 있는 직원의 수를 조회

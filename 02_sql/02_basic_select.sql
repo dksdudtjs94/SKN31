@@ -27,10 +27,12 @@ from   emp;
 
 select distinct job from emp;
 
+select distinct job, dept_name from emp; -- 행 기준 중복
+
 
 -- EMP 테이블에서 emp_id는 직원ID, emp_name은 직원이름, hire_date는 입사일, salary는 급여, dept_name은 소속부서 별칭으로 조회결과를 출력 한다.
-select emp_id as 직원ID, 
-       emp_name as 직원이름, 
+select emp_id as "직원 ID",   -- as 는 생략 가능
+       emp_name as "직원 이름", -- 별칭에 공백이 들어가면 " "로 묶어준다.
        hire_date as 입사일, 
        salary as 급여, 
        dept_name as 소속부서
@@ -66,15 +68,14 @@ select emp_id,
        emp_name, 
        salary, 
        comm_pct, 
-       salary * comm_pct as 커미션금액
+       salary * comm_pct as 커미션금액 -- 같은 행의 값끼리 계산
 from emp;
-
 
 
 /* *************************************
 where 절을 이용한 행 선택 
 
-주의 : mysql은 비교시 대소문자를 가리지 않는다.
+주의 : mysql은 비교시 값도 대소문자를 가리지 않는다.
       ex) select * from emp where emp_name = 'steven'; Steven 조회된다.
      대소문자 구별해서 비교하게 하려면 컬럼명 앞에 BINARY를 붙인다.
 	  ex) where BINARY emp_name = 'Steven' and BINARY job_id='aD_PRES';
@@ -89,6 +90,8 @@ where emp_id = 110;
 select emp_id, emp_name, dept_name 
 from emp 
 where dept_name != 'Sales';
+-- where dept_name <> 'Sales';
+-- where binary dept_name = 'sales';
 
 -- EMP 테이블에서 급여(salary)가 $10,000를 초과인 직원의 ID(emp_id), 이름(emp_name)과 급여(salary)를 조회
 select emp_id, emp_name, salary
@@ -98,17 +101,23 @@ where salary > 10000;
 -- EMP 테이블에서 커미션비율(comm_pct)이 0.2~0.3 사이인 직원의 ID(emp_id), 이름(emp_name), 커미션비율(comm_pct)을 조회.
 select emp_id, emp_name, comm_pct
 from emp
-where comm_pct between 0.2 and 0.3;
+-- where comm_pct between 0.2 and 0.3;
+where comm_pct not between 0.2 and 0.3;
+-- where comm_pct >= 0.2 and comm_pct <= 0.3;
 
 -- EMP 테이블에서 업무(job)가 'IT_PROG' 거나 'ST_MAN' 인 직원의  ID(emp_id), 이름(emp_name), 업무(job)을 조회.
 select emp_id, emp_name, job
 from emp
-where job in ('IT_PROG', 'ST_MAN');
+-- where job in ('IT_PROG', 'ST_MAN');
+where job not in ('IT_PROG', 'ST_MAN');
 
 -- EMP 테이블에서 직원 이름(emp_name)이 S로 시작하는 직원의  ID(emp_id), 이름(emp_name)을 조회.
 select emp_id, emp_name
 from emp
-where emp_name like 'S%';
+-- where emp_name like 'S%';
+-- where emp_name like '%en'; -- en으로 끝나는 이름
+-- where emp_name like '%eve%'; -- eve를 포함한 이름
+where emp_name not like '%eve%';
 
 -- EMP 테이블에서 직원 이름(emp_name)의 세 번째 문자가 “e”인 모든 사원의 이름을 조회
 select emp_name
@@ -119,7 +128,9 @@ where emp_name like '__e%';
 --    %나 _ 를 검색하는 값으로 사용할 경우. 
 select emp_id, emp_name
 from emp
-where emp_name like '%\%%' escape '\';
+where emp_name like '%$%%' escape '$'; 
+-- escape '문자' 문자%, 문자_ %와 _를 그대로 비교
+-- $% -> % 
 
 -- EMP 테이블에서 부서명(dept_name)이 null인 직원의 ID(emp_id), 이름(emp_name), 부서명(dept_name)을 조회.
 select emp_id, emp_name, dept_name
@@ -137,6 +148,7 @@ where comm_pct is not null;
 select emp_id, emp_name, hire_date
 from emp
 where year(hire_date) = 2004;
+-- where hire_date between '2004-01-01' and '2004-12-31';
 
 -- EMP 테이블에서 연봉(salary * 12) 이 200,000 이상인 직원들의 모든 정보를 조회.
 select *
@@ -207,12 +219,13 @@ order by emp_id desc;
 --  업무(job) 순서대로 (A -> Z) 조회하고 업무(job)가 같은 직원들은 급여(salary)가 높은 순서대로 2차 정렬해서 조회.
 select emp_id, emp_name, job, salary
 from emp
-order by job asc, salary desc;
+-- order by job asc, salary desc;
+order by 3 asc, 4 desc; -- select 절의 컬럼 순번을 사용할 수 있다.(1부터 시작)
 
 -- 급여(salary)가 $5,000을 넘는 직원의 ID(emp_id), 이름(emp_name), 급여(salary)를 급여가 높은 순서부터 조회
 select emp_id, emp_name, salary
 from emp
 where salary > 5000
-order by salary desc;
+order by salary desc; -- order by 3 desc;
 
 
