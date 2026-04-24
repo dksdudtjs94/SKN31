@@ -21,6 +21,7 @@
 
 - 서브쿼리는 반드시 ( ) 로 묶어줘야 한다.
 ************************************************************************** */
+
 -- 직원_ID(emp.emp_id)가 120번인 직원과 같은 업무(emp.job_id)를 하는 직원의 id(emp_id),이름(emp.emp_name), 업무(emp.job_id), 급여(emp.salary) 조회
 
 select emp_id, emp_name, job_id, salary
@@ -60,6 +61,7 @@ order by salary desc;
 
 -- 부서직원들의 평균 급여가 전체 직원의 평균(emp.salary) 이상인 부서의 이름(dept.dept_name), 평균 급여(emp.salary) 조회.
 -- 평균급여는 소숫점 2자리까지 나오고 통화표시($)와 단위 구분자 출력
+
 select  dept_id,
 		dept_name,
         concat('$', format(급여평균, 2)) "급여평균"

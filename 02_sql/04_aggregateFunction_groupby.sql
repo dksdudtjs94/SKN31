@@ -33,7 +33,7 @@ select sum(salary),
 	   avg(salary),
        min(salary),
        max(salary),
-       stddev(salary),
+       round(stddev(salary), 2) as stddev,
        variance(salary)
 from   emp;
 
@@ -94,7 +94,7 @@ select  job,
         max(salary),
         stddev(salary),
         variance(salary),
-        count(*) 
+        count(*)
 from emp
 group by job;        
 

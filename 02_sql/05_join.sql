@@ -1,5 +1,11 @@
 use hr_join;
 
+select * from emp where emp_id = 101;
+select * from dept where dept_id = 90;
+ 
+
+select * from job where job_id = 'AD_VP';
+
 /* ********************************************************************************
 조인(JOIN) 이란
 - 2개 이상의 테이블에 있는 컬럼들을 합쳐서 가상의 테이블을 만들어 조회하는 방식을 말한다.
