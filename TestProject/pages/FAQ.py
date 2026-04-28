@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import Query_Data as qd
+import FAQ_Data as qd
 import re
 
 # DB에서 DataFrame 형태로 로드
