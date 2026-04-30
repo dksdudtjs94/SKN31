@@ -35,5 +35,9 @@ uv pip install pandas streamlit requests
  uv pip install ipykernel pandas matplotlib
 
 
-
 판다스(sql + 엑셀) + matplotlib -> Data 분석, 관리
+
+
+정형데이터 - 표(table)
+
+비정형데이터 - 영상(동영상), 음성, text(자연어)
